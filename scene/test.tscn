@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyk2bhfrudumb"]
+[gd_scene load_steps=6 format=3 uid="uid://dyk2bhfrudumb"]
 
 [ext_resource type="PackedScene" uid="uid://dm8fjdtkhilbu" path="res://scene/player.tscn" id="1_4e1uf"]
 [ext_resource type="PackedScene" uid="uid://mgpyxjbq1rtl" path="res://scene/enemy.tscn" id="2_nq154"]
+[ext_resource type="Script" path="res://script/enemy_spawner.gd" id="3_l58jd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aicg0"]
 size = Vector2(42, 726)
@@ -35,6 +36,10 @@ shape = SubResource("RectangleShape2D_1nr3l")
 position = Vector2(0, -333)
 shape = SubResource("RectangleShape2D_1nr3l")
 
-[node name="Enemy" parent="." instance=ExtResource("2_nq154")]
+[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_nq154")]
 position = Vector2(303, -109)
 scale = Vector2(0.5, 0.5)
+target = NodePath("../Player")
+
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("3_l58jd")
