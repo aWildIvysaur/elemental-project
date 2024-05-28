@@ -1,10 +1,15 @@
 extends Node
 class_name Health
 
-var health: int = 100
+@export var health: int = 100
 
 @export var hit_cooldown: float = 1.0
 var last_hit: int = 0
+
+var parent: Node
+
+func _ready():
+    parent = get_parent()
 
 func damage(amount: int):
     var ms = Time.get_ticks_msec()
@@ -15,4 +20,4 @@ func damage(amount: int):
             die()
 
 func die():
-    queue_free()
+    parent.queue_free()

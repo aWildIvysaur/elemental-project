@@ -18,4 +18,5 @@ shape = SubResource("RectangleShape2D_bewko")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_be4wx")
-hit_cooldown = 0.5
+health = 50
+hit_cooldown = 0.1

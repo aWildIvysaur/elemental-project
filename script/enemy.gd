@@ -7,6 +7,9 @@ class_name Enemy
 @export var attack_range: float = 50
 
 func _physics_process(_delta: float):
+	if target == null:
+		return
+
 	var v = target.global_position - global_position
 	var dist = v.length()
 	var dir = v.normalized()
