@@ -5,17 +5,20 @@
 [ext_resource type="Script" path="res://script/enemy_health.gd" id="2_jpr86"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jy5po"]
+size = Vector2(128, 128)
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_b4ynx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_jy5po")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_o1wvn")
 flip_h = true
 flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jy5po")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_jpr86")
