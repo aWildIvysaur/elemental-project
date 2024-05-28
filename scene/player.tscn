@@ -11,11 +11,9 @@ size = Vector2(128, 128)
 script = ExtResource("1_np3po")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_qfl5v")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_bewko")
 
 [node name="Health" parent="." instance=ExtResource("3_yb8jh")]
