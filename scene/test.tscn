@@ -1,22 +1,33 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyk2bhfrudumb"]
 
-[ext_resource type="Script" path="res://script/player.gd" id="1_ivyrb"]
-[ext_resource type="Texture2D" uid="uid://b5cvid62s76bv" path="res://icon.svg" id="2_oghrg"]
+[ext_resource type="PackedScene" uid="uid://dm8fjdtkhilbu" path="res://scene/player.tscn" id="1_4e1uf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bewko"]
-size = Vector2(128, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aicg0"]
+size = Vector2(42, 726)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nr3l"]
+size = Vector2(1234, 20)
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(559, 318)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(3.235, 0)
-script = ExtResource("1_ivyrb")
+[node name="Player" parent="." instance=ExtResource("1_4e1uf")]
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_oghrg")
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-scale = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_bewko")
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(596, 0)
+shape = SubResource("RectangleShape2D_aicg0")
+
+[node name="left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-599, 0)
+shape = SubResource("RectangleShape2D_aicg0")
+
+[node name="bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 335)
+shape = SubResource("RectangleShape2D_1nr3l")
+
+[node name="top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, -333)
+shape = SubResource("RectangleShape2D_1nr3l")
