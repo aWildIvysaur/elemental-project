@@ -7,7 +7,12 @@ var health: int = 100
 var last_hit: int = 0
 
 func damage(amount: int):
-	var ms = Time.get_ticks_msec()
-	if last_hit == 0 or ms - last_hit > hit_cooldown * 1000:
-		health -= amount
-		last_hit = ms
+    var ms = Time.get_ticks_msec()
+    if last_hit == 0 or ms - last_hit > hit_cooldown * 1000:
+        health -= amount
+        last_hit = ms
+        if health <= 0:
+            die()
+
+func die():
+    queue_free()
