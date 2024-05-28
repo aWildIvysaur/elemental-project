@@ -17,3 +17,4 @@ texture = ExtResource("2_qfl5v")
 shape = SubResource("RectangleShape2D_bewko")
 
 [node name="Health" parent="." instance=ExtResource("3_yb8jh")]
+hit_cooldown = 0.5
