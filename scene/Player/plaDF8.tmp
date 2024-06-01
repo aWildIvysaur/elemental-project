@@ -12,7 +12,6 @@ b = Vector2(100, 0)
 script = ExtResource("1_iatoy")
 
 [node name="Area2D" type="Area2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
 
 [node name="FireCollision" type="CollisionPolygon2D" parent="Area2D"]
 visible = false
@@ -20,7 +19,8 @@ polygon = PackedVector2Array(0, 0, 0, 25, 25, 0)
 disabled = true
 
 [node name="FireFireImage" type="Sprite2D" parent="Area2D"]
-position = Vector2(25, 25)
+position = Vector2(12.5, 12.5)
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("2_xyc5r")
 
 [node name="EarthArea" type="CollisionShape2D" parent="Area2D"]
