@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://gc0ikpwdxdjb"]
+[gd_scene load_steps=7 format=3 uid="uid://gc0ikpwdxdjb"]
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_np3po"]
 [ext_resource type="Texture2D" uid="uid://b5cvid62s76bv" path="res://icon.svg" id="2_qfl5v"]
 [ext_resource type="Script" path="res://script/health.gd" id="3_be4wx"]
 [ext_resource type="PackedScene" uid="uid://cbbk768c7hn5u" path="res://scene/player_attack.tscn" id="4_jsw7j"]
+[ext_resource type="Script" path="res://script/element_input.gd" id="5_8emb1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bewko"]
 size = Vector2(128, 128)
@@ -23,3 +24,6 @@ shape = SubResource("RectangleShape2D_bewko")
 script = ExtResource("3_be4wx")
 health = 50
 hit_cooldown = 0.1
+
+[node name="ElementInput" type="Node" parent="."]
+script = ExtResource("5_8emb1")
