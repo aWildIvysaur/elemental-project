@@ -1,17 +1,17 @@
 extends CharacterBody2D
 class_name Player
 
-const Cooldown = preload ("res://script/cooldown.gd")
-
 const SPEED = 700
 const ACCELERATION = 0.8
 
-var attack = load("res://scene/player_attack.tscn")
-
 var acceleration = ACCELERATION
 
-
 var dash_cooldown = Cooldown.new(0)
+
+var elem_input: ElementInput
+
+func _ready():
+	elem_input = get_node("ElementInput")
 
 func _physics_process(_delta: float):
 	# Normalized input vector, ensures strafing is not faster than moving forward
@@ -31,16 +31,8 @@ func _physics_process(_delta: float):
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("attack"):
-		make_attack("fire", "fire", "fire")
+		elem_input.try_attack(get_global_mouse_position())
 
 	# Move acceleration towards base acceleration
 	if acceleration < ACCELERATION:
 		acceleration += 0.03
-	
-func make_attack(element1: String, element2: String, element3: String):
-	var a = attack.instantiate()
-	if element1 != "stone":
-		add_child(a)
-	else:
-		get_parent().add_child(a)
-	a.init(element1, element2, element3, get_global_mouse_position())

@@ -1,10 +1,11 @@
 extends Node
+class_name ElementInput
 
-var Attack = load("res://scene/attack.tscn")
+var Attack = load("res://scene/player_attack.tscn")
 
 enum AttackType {fire, stone, lightning}
 
-var attacks: Array = [null, null, null]
+var attacks = [AttackType.fire, AttackType.fire, AttackType.fire]
 var index = 0
 
 func _process(_delta: float):
@@ -29,4 +30,9 @@ func try_attack(pos: Vector2):
 	if attacks[0] != AttackType.fire:
 		parent = parent.get_parent()
 	parent.add_child(a)
-	a.init(attacks[0], attacks[1], attacks[2], pos)
+	a.init(
+		AttackType.keys()[attacks[0]],
+		AttackType.keys()[attacks[1]],
+		AttackType.keys()[attacks[2]],
+		pos
+	)
