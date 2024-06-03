@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://script/enemy.gd" id="1_b4ynx"]
 [ext_resource type="Texture2D" uid="uid://b5cvid62s76bv" path="res://icon.svg" id="1_o1wvn"]
-[ext_resource type="Script" path="res://script/enemy_health.gd" id="2_jpr86"]
+[ext_resource type="Script" path="res://script/health.gd" id="3_nf6re"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jy5po"]
 size = Vector2(128, 128)
@@ -21,4 +21,5 @@ flip_v = true
 shape = SubResource("RectangleShape2D_jy5po")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("2_jpr86")
+script = ExtResource("3_nf6re")
+hit_cooldown = 0.01
