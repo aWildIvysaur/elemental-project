@@ -6,8 +6,10 @@ const Cooldown = preload ("res://script/cooldown.gd")
 const SPEED = 700
 const ACCELERATION = 0.8
 
+var attack = load("res://scene/player_attack.tscn")
+
 var acceleration = ACCELERATION
-var attack = load("res://scene/Player/player_attack.tscn")
+
 
 var dash_cooldown = Cooldown.new(0)
 
@@ -37,7 +39,7 @@ func _physics_process(_delta: float):
 	
 func make_attack(element1: String, element2: String, element3: String):
 	var a = attack.instantiate()
-	if element1 == "fire":
+	if element1 != "stone":
 		add_child(a)
 	else:
 		get_parent().add_child(a)

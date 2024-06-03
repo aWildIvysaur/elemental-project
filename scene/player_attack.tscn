@@ -13,9 +13,12 @@ script = ExtResource("1_iatoy")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1e-05, 1e-05)
+collision_layer = 2
+collision_mask = 2
 
 [node name="FireCollision" type="CollisionPolygon2D" parent="Area2D"]
-visible = false
+position = Vector2(-0.0624989, 0.312502)
+scale = Vector2(2.125, 2.175)
 polygon = PackedVector2Array(0, 0, 0, 25, 25, 0)
 disabled = true
 
@@ -33,3 +36,6 @@ visible = false
 shape = SubResource("SegmentShape2D_pf10v")
 disabled = true
 one_way_collision_margin = 1.2
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

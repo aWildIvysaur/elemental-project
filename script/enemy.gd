@@ -19,4 +19,4 @@ func _physics_process(_delta: float):
 	if dist < attack_range:
 		var health = target.get_node("Health")
 		if health:
-			health.damage(1)
+			health.damage(1, "normal", 0)
