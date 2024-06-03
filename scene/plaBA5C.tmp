@@ -2,12 +2,8 @@
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_np3po"]
 [ext_resource type="Texture2D" uid="uid://b5cvid62s76bv" path="res://icon.svg" id="2_qfl5v"]
-
 [ext_resource type="PackedScene" path="res://scene/player_health.tscn" id="3_yb8jh"]
 [ext_resource type="PackedScene" uid="uid://cbbk768c7hn5u" path="res://scene/Player/player_attack.tscn" id="4_jsw7j"]
-
-[ext_resource type="Script" path="res://script/health.gd" id="3_be4wx"]
-
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bewko"]
 size = Vector2(128, 128)
@@ -21,11 +17,6 @@ texture = ExtResource("2_qfl5v")
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bewko")
 
+[node name="Health" parent="." instance=ExtResource("3_yb8jh")]
 
 [node name="PlayerAttack" parent="." instance=ExtResource("4_jsw7j")]
-
-[node name="Health" type="Node" parent="."]
-script = ExtResource("3_be4wx")
-health = 50
-hit_cooldown = 0.1
-
