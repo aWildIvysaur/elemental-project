@@ -1,8 +1,15 @@
 extends Node
 
+
 var timedict = { 
 	"fire": 2000, 
 	"stone": 3000, 
+	"lightning": 1000, 
+}
+
+var invuldict = {
+	"fire": 100, 
+	"stone": 1000, 
 	"lightning": 1000, 
 }
 
@@ -33,7 +40,8 @@ var dmultdict = {
 var collider: CollisionPolygon2D
 var time_till_damage:int
 var collider_size_mult:float
-var damage_mult:float
+var damage_mult: float
+var damage_invul: int
 var damage_type:String
 var pos_start: Vector2
 var pos_end: Vector2
@@ -51,9 +59,11 @@ func _process(delta):
 func init(area_mod:String, time_mod:String, damage_mod:String, mos_pos: Vector2):
 	#region Get Derivatives
 	collider = areadict[area_mod]
+	collider.disabled = false
 	time_till_damage = timedict[time_mod]
 	collider_size_mult = sizedict[time_mod]
 	damage_mult = dmultdict[damage_mod]
+	damage_invul = invuldict[area_mod]
 	damage_type = damage_mod
 	pos_end = mos_pos
 	image = spritedict[area_mod + damage_mod]
@@ -66,3 +76,9 @@ func init(area_mod:String, time_mod:String, damage_mod:String, mos_pos: Vector2)
 	if area_mod == "stone":
 		area.position = pos_end
 
+func _on_area_2d_body_entered(body):
+	print("hit something")
+	if body is Enemy:
+		var h = body.get_node("Health")
+		if h.get_hit_CD():
+			h.damage(100 * damage_mult, damage_type, damage_invul)

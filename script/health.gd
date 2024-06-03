@@ -3,21 +3,30 @@ class_name Health
 
 @export var health: int = 100
 
-@export var hit_cooldown: float = 1.0
-var last_hit: int = 0
+var next_hit: int = 0
 
 var parent: Node
 
-func _ready():
-    parent = get_parent()
+enum AttackKind {
+	fire,
+	stone,
+	lightning,
+	normal,
+}
+	
 
-func damage(amount: int):
-    var ms = Time.get_ticks_msec()
-    if last_hit == 0 or ms - last_hit > hit_cooldown * 1000:
-        health -= amount
-        last_hit = ms
-        if health <= 0:
-            die()
+func _ready():
+	parent = get_parent()
+
+func damage(amount: int, type: String, invul_time: int):
+	var ms = Time.get_ticks_msec()
+	health -= amount
+	next_hit = ms + invul_time
+	if health <= 0:
+		die()
+		
+func get_hit_CD():
+	return next_hit <= Time.get_ticks_msec()
 
 func die():
-    parent.queue_free()
+	parent.queue_free()

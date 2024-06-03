@@ -22,4 +22,3 @@ shape = SubResource("RectangleShape2D_jy5po")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_nf6re")
-hit_cooldown = 0.01
