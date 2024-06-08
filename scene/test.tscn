@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyk2bhfrudumb"]
+[gd_scene load_steps=7 format=3 uid="uid://dyk2bhfrudumb"]
 
 [ext_resource type="PackedScene" uid="uid://gc0ikpwdxdjb" path="res://scene/player.tscn" id="1_4e1uf"]
 [ext_resource type="PackedScene" uid="uid://mgpyxjbq1rtl" path="res://scene/enemy.tscn" id="2_nq154"]
 [ext_resource type="Script" path="res://script/enemy_spawner.gd" id="3_l58jd"]
+[ext_resource type="PackedScene" uid="uid://ni5ieuajcnvi" path="res://scene/game_mode_ui.tscn" id="4_rdod0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aicg0"]
 size = Vector2(42, 726)
@@ -45,3 +46,7 @@ target = NodePath("../Player")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("3_l58jd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Game Mode UI" parent="CanvasLayer" instance=ExtResource("4_rdod0")]
