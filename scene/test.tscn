@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyk2bhfrudumb"]
+[gd_scene load_steps=12 format=3 uid="uid://dyk2bhfrudumb"]
 
 [ext_resource type="PackedScene" uid="uid://gc0ikpwdxdjb" path="res://scene/player.tscn" id="1_4e1uf"]
+[ext_resource type="Script" path="res://scene/game_handler.gd" id="1_elvic"]
 [ext_resource type="PackedScene" uid="uid://mgpyxjbq1rtl" path="res://scene/enemy.tscn" id="2_nq154"]
 [ext_resource type="Script" path="res://script/enemy_spawner.gd" id="3_l58jd"]
+[ext_resource type="PackedScene" uid="uid://ni5ieuajcnvi" path="res://scene/game_mode_ui.tscn" id="4_rdod0"]
+[ext_resource type="Script" path="res://scene/game_mode_ui.gd" id="6_0ijpk"]
+[ext_resource type="PackedScene" uid="uid://b0ys855x320o8" path="res://scene/pause_menu.tscn" id="6_r83ug"]
+[ext_resource type="PackedScene" uid="uid://bk6tc2ibw4r67" path="res://scene/options_menu.tscn" id="7_rwwjc"]
+[ext_resource type="Script" path="res://scene/options_menu.gd" id="10_76myj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aicg0"]
 size = Vector2(42, 726)
@@ -10,38 +16,65 @@ size = Vector2(42, 726)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nr3l"]
 size = Vector2(1234, 20)
 
-[node name="Node2D" type="Node2D"]
+[node name="GameHandler" type="Node" node_paths=PackedStringArray("pause_menu", "options_menu", "HUD")]
+process_mode = 3
+script = ExtResource("1_elvic")
+pause_menu = NodePath("Interface/PauseMenuLayer/PauseMenu")
+options_menu = NodePath("Interface/OptionsMenuLayer/OptionsMenu")
+HUD = NodePath("Interface/UILayer/GameModeUI")
 
-[node name="Player" parent="." instance=ExtResource("1_4e1uf")]
+[node name="Interface" type="Node" parent="."]
+
+[node name="UILayer" type="CanvasLayer" parent="Interface"]
+
+[node name="GameModeUI" parent="Interface/UILayer" instance=ExtResource("4_rdod0")]
+script = ExtResource("6_0ijpk")
+
+[node name="PauseMenuLayer" type="CanvasLayer" parent="Interface"]
+
+[node name="PauseMenu" parent="Interface/PauseMenuLayer" node_paths=PackedStringArray("game_handler", "options_menu") instance=ExtResource("6_r83ug")]
+game_handler = NodePath("../../..")
+options_menu = NodePath("../../OptionsMenuLayer")
+
+[node name="OptionsMenuLayer" type="CanvasLayer" parent="Interface"]
+
+[node name="OptionsMenu" parent="Interface/OptionsMenuLayer" node_paths=PackedStringArray("game_handler") instance=ExtResource("7_rwwjc")]
+script = ExtResource("10_76myj")
+game_handler = NodePath("../../..")
+
+[node name="Level" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="Player" parent="Level" instance=ExtResource("1_4e1uf")]
 unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Level"]
 
-[node name="Walls" type="StaticBody2D" parent="."]
+[node name="Walls" type="StaticBody2D" parent="Level"]
 collision_layer = 3
 collision_mask = 3
 
-[node name="right" type="CollisionShape2D" parent="Walls"]
+[node name="right" type="CollisionShape2D" parent="Level/Walls"]
 position = Vector2(596, 0)
 shape = SubResource("RectangleShape2D_aicg0")
 
-[node name="left" type="CollisionShape2D" parent="Walls"]
+[node name="left" type="CollisionShape2D" parent="Level/Walls"]
 position = Vector2(-599, 0)
 shape = SubResource("RectangleShape2D_aicg0")
 
-[node name="bottom" type="CollisionShape2D" parent="Walls"]
+[node name="bottom" type="CollisionShape2D" parent="Level/Walls"]
 position = Vector2(0, 335)
 shape = SubResource("RectangleShape2D_1nr3l")
 
-[node name="top" type="CollisionShape2D" parent="Walls"]
+[node name="top" type="CollisionShape2D" parent="Level/Walls"]
 position = Vector2(0, -333)
 shape = SubResource("RectangleShape2D_1nr3l")
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_nq154")]
+[node name="Enemy" parent="Level" node_paths=PackedStringArray("target") instance=ExtResource("2_nq154")]
 position = Vector2(303, -109)
 scale = Vector2(0.5, 0.5)
 target = NodePath("../Player")
 
-[node name="EnemySpawner" type="Node" parent="."]
+[node name="EnemySpawner" type="Node" parent="Level"]
 script = ExtResource("3_l58jd")
