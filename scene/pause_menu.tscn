@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ys855x320o8"]
+
+[ext_resource type="Script" path="res://scene/pause_menu.gd" id="1_g25u3"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g25u3")
+
+[node name="PauseMenuHome" type="Panel" parent="."]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseMenuHome"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -23.5
+offset_top = 5.0
+offset_right = 23.5
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "Pause"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuHome"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = 30.0
+offset_right = 35.0
+offset_bottom = 96.0
+grow_horizontal = 2
+
+[node name="Resume" type="Button" parent="PauseMenuHome/VBoxContainer"]
+layout_mode = 2
+text = "Resume
+"
+
+[node name="Quit" type="Button" parent="PauseMenuHome/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[connection signal="pressed" from="PauseMenuHome/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenuHome/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
